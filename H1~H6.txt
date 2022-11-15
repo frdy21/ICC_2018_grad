@@ -1,0 +1,95 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//HC1~HC6
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+always @(posedge clk or posedge reset) 
+	begin
+		if(reset)
+			begin
+				HC1 <= 8'd0;
+				HC2 <= 8'd0;
+				HC3 <= 8'd0;
+				HC4 <= 8'd0;
+				HC5 <= 8'd0;
+				HC6 <= 8'd0;			
+			end
+		else
+			begin
+				case(current_state)
+					SPLIT:
+						begin
+							case(spilt_cnt)
+								0:
+									begin
+										HC1[0] <= (Queue[5] < C_Queue[4]) ? 1'd1 : (Queue[5] < C_Queue[4]) ? 1'd0 : 1'd0; //4
+										HC2[1] <= (Queue[5] < C_Queue[4]) ? 1'd0 : (Queue[5] < C_Queue[4]) ? 1'd1 : 1'd1; //6
+										HC3[2] <= (Queue[5] < C_Queue[4]) ? 1'd0 : (Queue[5] < C_Queue[4]) ? 1'd1 : 1'd1; //5
+										HC4[3] <= (Queue[5] < C_Queue[4]) ? 1'd0 : (Queue[5] < C_Queue[4]) ? 1'd1 : 1'd1; //2
+										HC5[4] <= (Queue[5] < C_Queue[4]) ? 1'd0 : (Queue[5] < C_Queue[4]) ? 1'd1 : 1'd1; //1
+										HC6[4] <= (Queue[5] < C_Queue[4]) ? 1'd0 : (Queue[5] < C_Queue[4]) ? 1'd1 : 1'd1; //3
+									end
+								1:
+									begin
+										//HC1[1] <= (Queue[4] < C_Queue[3]) ? 1'd0 : (Queue[4] == C_Queue[3]) ? 1'd1 : 1'd1;
+										HC2[0] <= (Queue[4] < C_Queue[3]) ? 1'd1 : (Queue[4] == C_Queue[3]) ? 1'd0 : 1'd0;
+										HC3[1] <= (Queue[4] < C_Queue[3]) ? 1'd0 : (Queue[4] == C_Queue[3]) ? 1'd1 : 1'd1;
+										HC4[2] <= (Queue[4] < C_Queue[3]) ? 1'd0 : (Queue[4] == C_Queue[3]) ? 1'd1 : 1'd1;
+										HC5[3] <= (Queue[4] < C_Queue[3]) ? 1'd0 : (Queue[4] == C_Queue[3]) ? 1'd1 : 1'd1;
+										HC6[3] <= (Queue[4] < C_Queue[3]) ? 1'd0 : (Queue[4] == C_Queue[3]) ? 1'd1 : 1'd1;
+									end
+								2:	begin
+										//HC1[2] <= (Queue[3] < C_Queue[2]) ? 1'd0 : (Queue[3] == C_Queue[2]) ? 1'd1 : 1'd1;
+										//HC2[2] <= (Queue[3] < C_Queue[2]) ? 1'd0 : (Queue[3] == C_Queue[2]) ? 1'd1 : 1'd1;
+										HC3[0] <= (Queue[3] < C_Queue[2]) ? 1'd1 : (Queue[3] == C_Queue[2]) ? 1'd0 : 1'd0;
+										HC4[1] <= (Queue[3] < C_Queue[2]) ? 1'd0 : (Queue[3] == C_Queue[2]) ? 1'd1 : 1'd1;
+										HC5[2] <= (Queue[3] < C_Queue[2]) ? 1'd0 : (Queue[3] == C_Queue[2]) ? 1'd1 : 1'd1;
+										HC6[2] <= (Queue[3] < C_Queue[2]) ? 1'd0 : (Queue[3] == C_Queue[2]) ? 1'd1 : 1'd1;
+									end
+								3:	begin
+										//HC1[3] <= (Queue[2] < C_Queue[1]) ? 1'd0 : (Queue[2] == C_Queue[1]) ? 1'd1 : 1'd1;
+										//HC2[3] <= (Queue[2] < C_Queue[1]) ? 1'd0 : (Queue[2] == C_Queue[1]) ? 1'd1 : 1'd1;
+										//HC3[3] <= (Queue[2] < C_Queue[1]) ? 1'd0 : (Queue[2] == C_Queue[1]) ? 1'd1 : 1'd1;
+										HC4[0] <= (Queue[2] < C_Queue[1]) ? 1'd1 : (Queue[2] == C_Queue[1]) ? 1'd0 : 1'd0;
+										HC5[1] <= (Queue[2] < C_Queue[1]) ? 1'd0 : (Queue[2] == C_Queue[1]) ? 1'd1 : 1'd1;
+										HC6[1] <= (Queue[2] < C_Queue[1]) ? 1'd0 : (Queue[2] == C_Queue[1]) ? 1'd1 : 1'd1;
+									end
+								4:	begin
+										//HC1[4] <= (Queue[1] < C_Queue[0]) ? 1'd0 : (Queue[1] == C_Queue[0]) ? 1'd1 : 1'd1;
+										//HC2[4] <= (Queue[1] < C_Queue[0]) ? 1'd0 : (Queue[1] == C_Queue[0]) ? 1'd1 : 1'd1;
+										//HC3[4] <= (Queue[1] < C_Queue[0]) ? 1'd0 : (Queue[1] == C_Queue[0]) ? 1'd1 : 1'd1;
+										//HC4[4] <= (Queue[1] < C_Queue[0]) ? 1'd0 : (Queue[1] == C_Queue[0]) ? 1'd1 : 1'd1;
+										HC5[0] <= (Queue[1] < C_Queue[0]) ? 1'd1 : (Queue[1] == C_Queue[0]) ? 1'd0 : 1'd0;
+										HC6[0] <= (Queue[1] < C_Queue[0]) ? 1'd0 : (Queue[1] == C_Queue[0]) ? 1'd1 : 1'd1;
+									end
+								5:	begin
+										//HC1[5] <= (Queue[1] < Queue[0]) ? 1'd0 : (Queue[1] == Queue[0]) ? 1'd1 : 1'd1;
+										//HC2[5] <= (Queue[1] < Queue[0]) ? 1'd0 : (Queue[1] == Queue[0]) ? 1'd1 : 1'd1;
+										//HC3[5] <= (Queue[1] < Queue[0]) ? 1'd0 : (Queue[1] == Queue[0]) ? 1'd1 : 1'd1;
+										//HC4[5] <= (Queue[1] < Queue[0]) ? 1'd0 : (Queue[1] == Queue[0]) ? 1'd1 : 1'd1;
+										//HC5[5] <= (Queue[1] < Queue[0]) ? 1'd0 : (Queue[1] == Queue[0]) ? 1'd1 : 1'd1;
+										HC6[5] <= (Queue[1] < Queue[0]) ? 1'd1 : (Queue[1] == Queue[0]) ? 1'd0 : 1'd0;
+									end
+							default:
+								begin
+									HC1 <= HC1;
+									HC2 <= HC2;
+									HC3 <= HC3;
+									HC4 <= HC4;
+									HC5 <= HC5;
+									HC6 <= HC6;									
+								end
+							endcase					
+						end
+				default:
+					begin
+						HC1 <= HC1;
+						HC2 <= HC2;
+						HC3 <= HC3;
+						HC4 <= HC4;
+						HC5 <= HC5;
+						HC6 <= HC6;			
+					end
+				endcase
+
+			end
+	end
